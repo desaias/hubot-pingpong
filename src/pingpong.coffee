@@ -6,7 +6,7 @@
 #
 # Commands:
 #   hubot ping pong <score> <winner> <loser> - Save a ping pong game and update stats
-#   hubot ping pong stats - Gets all of the ping pong stats
+#   ping pong stats - Gets all of the ping pong stats
 #
 # Notes:
 #   <optional notes required for the script>
