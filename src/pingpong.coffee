@@ -23,7 +23,7 @@ toTitleCase = (str) ->
   str.replace /\w\S*/g, (txt) ->
     txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
 
-firebase = new Firebase(process.env.HUBOT_FIREBASE_URL);
+firebase = new Firebase(process.env.HUBOT_PINGPONG_FIREBASE_URL);
 
 module.exports = (robot) ->
   robot.respond /ping pong\s([0-9]{1,2}-[0-9]{1,2})\s(.+)\s(.+)/i, (msg) ->
