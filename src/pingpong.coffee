@@ -14,7 +14,7 @@
 # Author:
 #   desaias
 
-Table = require 'cli-table'
+# Table = require 'cli-table'
 Firebase = require 'firebase'
 moment = require 'moment'
 _ = require 'lodash'
