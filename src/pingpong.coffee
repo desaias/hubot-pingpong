@@ -2,7 +2,7 @@
 #   Keep track of you ping pong games
 #
 # Configuration:
-#   LIST_OF_ENV_VARS_TO_SET
+#   HUBOT_FIREBASE_URL  (ie: "https://<app-name>.firebaseio.com/")
 #
 # Commands:
 #   hubot ping pong <score> <winner> <loser> - Save a ping pong game and update stats
