@@ -67,11 +67,6 @@ module.exports = (robot) ->
 
 
   robot.hear /ping pong stats/i, (msg)->
-    table = new Table(
-      head: ['Date of Game','Loser','Score','Winner'],
-      colWidths: [40, 10, 20, 10],
-      style: { head: false, border: [] }
-    )
     firebase.child('players').on 'value', (snapshot) ->
       _.map snapshot.val(), (value, key) ->
         msg.send "#{toTitleCase(key)}: #{value.wins} - #{value.losses}"
