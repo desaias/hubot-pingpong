@@ -1,19 +1,19 @@
 {
   "name": "hubot-pingpong",
   "description": "Keep track of you ping pong games",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "author": "desaias <dge@davidesaias.com>",
   "license": "MIT",
 
-  "keywords": ["hubot","hubot-scripts"],
+  "keywords": ["hubot","hubot-scripts","ping pong"],
 
   "repository": {
     "type": "git",
-    "url": "git://github.com/hubot-scripts/hubot-pingpong.git"
+    "url": "git://github.com/desaias/hubot-pingpong.git"
   },
 
   "bugs": {
-    "url": "https://github.com/hubot-scripts/hubot-pingpong/issues"
+    "url": "https://github.com/desaias/hubot-pingpong/issues"
   },
 
   "dependencies": {
