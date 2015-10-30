@@ -60,28 +60,18 @@ module.exports = (robot) ->
           losses: 1
     )
 
-    msg.send "Way to go #{msg.match[2]}!"
-    msg.send "#{msg.match[3]}... you suck!"
+
+
+    msg.send "Way to go #{toTitleCase(msg.match[2])}!"
+    msg.send "#{toTitleCase(msg.match[3])}... you suck!"
 
 
   robot.hear /ping pong stats/i, (msg)->
     table = new Table(
-      head: [
-        'Date'
-        'Winner'
-        'Loser'
-        'Score'
-      ]
-      colWidths: [
-        200
-        200
-        200
-        200
-      ])
-    firebase.child('games').once 'value', (snapshot) ->
-      obj = snapshot.val()
-      _.each obj, (game) ->
-        table.push game
-        return
-      msg.send table
-      return
+      head: ['Date of Game','Loser','Score','Winner'],
+      colWidths: [40, 10, 20, 10],
+      style: { head: false, border: [] }
+    )
+    firebase.child('players').on 'value', (snapshot) ->
+      _.map snapshot.val(), (value, key) ->
+        msg.send "#{toTitleCase(key)}: #{value.wins} - #{value.losses}"
