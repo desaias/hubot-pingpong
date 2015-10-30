@@ -13,7 +13,7 @@ describe 'pingpong', ->
     require('../src/pingpong')(@robot)
 
   it 'registers a respond listener', ->
-    expect(@robot.respond).to.have.been.calledWith(/hello/)
+    expect(@robot.respond).to.have.been.calledWith(/ping pong 10-3 dave1 dave2/)
 
   it 'registers a hear listener', ->
-    expect(@robot.hear).to.have.been.calledWith(/orly/)
+    expect(@robot.hear).to.have.been.calledWith(/ping pong stats/)
