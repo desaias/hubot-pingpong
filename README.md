@@ -25,7 +25,7 @@ env HUBOT_FIREBASE_URL='https://<app-name>.firebaseio.com/'
 ```
 example>> hubot ping pong <score> <winner> <loser> 
 
-user>> hubot ping pong 10-9 Dave Quinn
+user>> hubot ping pong 10-9 Dave Jeremy
 ```
 
 ### To see player stats
