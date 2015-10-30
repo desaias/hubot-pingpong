@@ -5,18 +5,83 @@
 #   LIST_OF_ENV_VARS_TO_SET
 #
 # Commands:
-#   hubot hello - <what the respond trigger does>
-#   orly - <what the hear trigger does>
+#   hubot ping pong <score> <winner> <loser> - Save a ping pong game and update stats
+#   hubot ping pong stats - Gets all of the ping pong stats
 #
 # Notes:
 #   <optional notes required for the script>
 #
 # Author:
-#   desaias[@<org>]
+#   desaias
+
+Table = require 'cli-table'
+Firebase = require 'firebase'
+moment = require 'moment'
+_ = require 'lodash'
+
+toTitleCase = (str) ->
+  str.replace /\w\S*/g, (txt) ->
+    txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+
+firebase = new Firebase(process.env.HUBOT_FIREBASE_URL);
 
 module.exports = (robot) ->
-  robot.respond /hello/, (msg) ->
-    msg.reply "hello!"
+  robot.respond /ping pong\s([0-9]{1,2}-[0-9]{1,2})\s(.+)\s(.+)/i, (msg) ->
+    games = firebase.child('games')
+    games.push
+      date: moment().format('YYYY-MM-DD hh:mm:ss')
+      score: msg.match[1]
+      winner: msg.match[2]
+      loser: msg.match[3]
 
-  robot.hear /orly/, ->
-    msg.send "yarly"
+    players = firebase.child('players/')
+
+    winner = players.child(toTitleCase(msg.match[2]))
+    winner.once 'value', ((snapshot) ->
+      if snapshot.exists()
+        obj = snapshot.val()
+        winner.update
+          wins: obj.wins + 1
+      else
+        winner.set
+          wins: 1
+          losses: 0
+    )
+
+    loser = players.child(toTitleCase(msg.match[3]))
+    loser.once 'value', ((snapshot) ->
+      if snapshot.exists()
+        obj = snapshot.val()
+        loser.update
+          losses: obj.losses + 1
+      else
+        loser.set
+          wins: 0
+          losses: 1
+    )
+
+    msg.send "Way to go #{msg.match[2]}!"
+    msg.send "#{msg.match[3]}... you suck!"
+
+
+  robot.hear /ping pong stats/i, (msg)->
+    table = new Table(
+      head: [
+        'Date'
+        'Winner'
+        'Loser'
+        'Score'
+      ]
+      colWidths: [
+        200
+        200
+        200
+        200
+      ])
+    firebase.child('games').once 'value', (snapshot) ->
+      obj = snapshot.val()
+      _.each obj, (game) ->
+        table.push game
+        return
+      msg.send table
+      return
