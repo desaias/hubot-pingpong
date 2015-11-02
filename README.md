@@ -15,7 +15,7 @@ Then add **hubot-pingpong** to your `external-scripts.json`:
 ```json
 ["hubot-pingpong"]
 ```
-Also make sure to add **HUBOT_PINGPONG_FIREBASE_URL** as an env variable on startup (trailing slash is important!)
+Also make sure to add **HUBOT_PINGPONG_FIREBASE_URL** as an env variable on startup
 ```
 env HUBOT_PINGPONG_FIREBASE_URL='https://<app-name>.firebaseio.com/'
 ```
