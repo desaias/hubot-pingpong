@@ -60,13 +60,12 @@ module.exports = (robot) ->
           losses: 1
     )
 
-
-
-    msg.send "Way to go #{toTitleCase(msg.match[2])}!"
-    msg.send "#{toTitleCase(msg.match[3])}... you suck!"
+    msg.send "Way to go #{toTitleCase(msg.match[2])}!\n#{toTitleCase(msg.match[3])}... you suck!"
 
 
   robot.hear /ping pong stats/i, (msg)->
     firebase.child('players').on 'value', (snapshot) ->
+      message = ''
       _.map snapshot.val(), (value, key) ->
-        msg.send "#{toTitleCase(key)}: #{value.wins} - #{value.losses}"
+        message += "#{toTitleCase(key)}: #{value.wins} - #{value.losses}"
+      msg.send message
