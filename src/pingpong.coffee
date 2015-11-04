@@ -67,5 +67,5 @@ module.exports = (robot) ->
     firebase.child('players').on 'value', (snapshot) ->
       message = ''
       _.map snapshot.val(), (value, key) ->
-        message += "#{toTitleCase(key)}: #{value.wins} - #{value.losses}"
+        message += "#{toTitleCase(key)}: #{value.wins} - #{value.losses}\n"
       msg.send message
