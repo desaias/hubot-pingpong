@@ -64,8 +64,8 @@ module.exports = (robot) ->
 
 
   robot.hear /ping pong stats/i, (msg)->
+    message = ''
     firebase.child('players').on 'value', (snapshot) ->
-      message = ''
       _.map snapshot.val(), (value, key) ->
         message += "#{toTitleCase(key)}: #{value.wins} - #{value.losses}\n"
-      msg.send message
+    msg.send message
