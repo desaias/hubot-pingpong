@@ -29,7 +29,7 @@ module.exports = (robot) ->
   robot.respond /ping pong\s([0-9]{1,2}-[0-9]{1,2})\s(.+)\s(.+)/i, (msg) ->
     games = firebase.child('games')
     games.push
-      date: moment().format('YYYY-MM-DD hh:mm:ss')
+      date: moment().format('YYYY-MM-DD HH:mm:ss')
       score: msg.match[1]
       winner: msg.match[2]
       loser: msg.match[3]
